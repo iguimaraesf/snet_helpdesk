@@ -25,24 +25,24 @@ public class User {
     // Validação física: OK
     @Column(nullable = false, unique = true)
     // Validação de bean: questionável
-    @NotEmpty
+    @NotEmpty(message = "Cannot be blank")
     @Email
     private String email;
     @Column
     // Validação de bean: questionável
-    @NotEmpty
+    @NotEmpty(message = "Cannot be blank")
     private String name;
     @Column
     // Validação de bean: questionável
-    @NotEmpty
+    @NotEmpty(message = "Cannot be blank")
     private String lastName;
     @Column
     // Validação de bean: questionável
-    @NotEmpty
-    @Length(min = 5)
+    @NotEmpty(message = "Cannot be blank")
+    @Length(min = 5, message = "Must be at least 5 characters long")
     private String password;
     @Column
-    private Boolean active;
+    private Boolean active = true;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
