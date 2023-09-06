@@ -16,6 +16,7 @@ public class UserController {
     private final UserService service;
     @GetMapping
     public String index(Model model) {
+        model.addAttribute("list", service.findAll());
         return "users/index";
     }
 
@@ -27,6 +28,7 @@ public class UserController {
 
     @GetMapping("{id}")
     public String edit(@PathVariable Long id, Model model) {
+        model.addAttribute("user", service.show(id));
         return "users/edit";
     }
 
@@ -36,6 +38,24 @@ public class UserController {
             return "users/create";
         }
         service.create(user);
+        return "redirect:/users";
+    }
+
+    @DeleteMapping("{id}")
+    public String delete(@PathVariable Long id, Model model) {
+        service.delete(id);
+        return "redirect:/users";
+    }
+
+    @PutMapping("{id}")
+    public String update(@PathVariable Long id,
+                         @Valid @ModelAttribute("user") User user,
+                         BindingResult bindingResult,
+                         Model model) {
+        if (bindingResult.hasErrors()) {
+            return "users/edit";
+        }
+        service.update(id, user);
         return "redirect:/users";
     }
 }

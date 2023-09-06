@@ -28,7 +28,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(Long id, User user) {
-        var res = repository.findById(id).orElseThrow();
-        repository.save(res);
+        var existent = show(id);
+        existent.setName(user.getName());
+        existent.setEmail(user.getEmail());
+        existent.setLastName(user.getLastName());
+        existent.setPassword(user.getPassword());
+        existent.setActive(user.getActive());
+        repository.save(existent);
+    }
+
+    @Override
+    public User show(Long id) {
+        return repository.findById(id).orElseThrow();
     }
 }
