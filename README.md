@@ -37,6 +37,15 @@ Não substitui o método POST pelo método DELETE. Precisa configurar pra fazer 
     ## MVC
     spring.mvc.hiddenmethod.filter.enabled=true
 
+Quando se coloca as dependências do spring-security, não é mais possível chamar os controllers sem que se
+configure a segurança.
+
+A classe WebMvcConfigurerAdapter não existe mais. Agora, ao invés de extender essa classe, deve-se implementar
+a classe WebMvcConfigurer
+
+Não existe mais a classe WebSecurityConfigurerAdapter. Agora a classe de configuração não extende nada.
+Está bem diferente. Tem neste [video](https://www.youtube.com/watch?v=5w-YCcOjPD0) tem uma ajuda para solucionar.
+
 ### Já sei que não vai funcionar o layout do thymeleaf
 Porque não incluiu a dependência.
 
